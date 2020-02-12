@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Collections;
-using Unity.Entities;
+﻿using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Rendering;
 using Unity.Transforms;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Material = UnityEngine.Material;
 
 public class PlayerInputECS : MonoBehaviour
 {
@@ -46,6 +44,8 @@ public class PlayerInputECS : MonoBehaviour
         
        _entity = manager.CreateEntity(playerArchetype);
        
+       manager.SetComponentData(_entity, new Translation() { Value = new float3( 10, 0, 0)});
+       
        manager.SetSharedComponentData(_entity, new RenderMesh()
        {
            mesh = playerMesh,
@@ -53,6 +53,8 @@ public class PlayerInputECS : MonoBehaviour
        });
         
     }
+    
+    
 
     private void OnRightClickCanceled(InputAction.CallbackContext obj)
     {
@@ -73,5 +75,4 @@ public class PlayerInputECS : MonoBehaviour
     {
         movement = obj.ReadValue<Vector2>();
     }
-    
 }

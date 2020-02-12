@@ -406,7 +406,7 @@ MonoBehaviour:
   isRightClicking: 0
   movement: {x: 0, y: 0}
   playerMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-  playerMaterial: {fileID: 2100006, guid: bae110eee250e4b418b188f4ae4e3170, type: 3}
+  playerMaterial: {fileID: 2100000, guid: c532880e607f8c84d8b9bf0c46a522ad, type: 2}
 --- !u!114 &1169068961
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,8 +15,8 @@ public class PlayerInputSystem : JobComponentSystem
             .WithoutBurst()
             .ForEach((ref Translation t, in PlayerComponentTag p) =>
             {
-                t.Value.x += Input.GetAxis("Horizontal") * Time.DeltaTime;
-                t.Value.y += Input.GetAxis("Vertical") * Time.DeltaTime;
+                t.Value.x += Input.GetAxis("Horizontal") * 3 * Time.DeltaTime;
+                t.Value.y += Input.GetAxis("Vertical") * 3 * Time.DeltaTime;
             }).Run();
         return default;
     }
