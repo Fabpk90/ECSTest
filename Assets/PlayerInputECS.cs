@@ -45,6 +45,7 @@ public class PlayerInputECS : MonoBehaviour
        _entity = manager.CreateEntity(playerArchetype);
        
        manager.SetComponentData(_entity, new Translation() { Value = new float3( 10, 0, 0)});
+       manager.SetComponentData(_entity, new ActorComponent() { atk = 2, def = 3, health = 50});
        
        manager.SetSharedComponentData(_entity, new RenderMesh()
        {

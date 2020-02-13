@@ -21,31 +21,25 @@ public class TestECS : MonoBehaviour
         var manager = World.DefaultGameObjectInjectionWorld.EntityManager;
 
         var archetype = manager.CreateArchetype( typeof(Translation), typeof(RenderMesh),
-            typeof(LocalToWorld), typeof(MoveComponent), typeof(ActorComponent), typeof(EnemyComponentTag));
+            typeof(LocalToWorld), typeof(MoveComponent), typeof(ActorComponent), typeof(EnemyComponent));
 
-        // manager.SetChunkComponentData()
-
-        array = new NativeArray<Entity>(50000, Allocator.Persistent);
+        array = new NativeArray<Entity>(5000, Allocator.Persistent);
         
         manager.CreateEntity(archetype, array);
         
-        for (int i = 0; i < array.Length; i++)
+        foreach (var t in array)
         {
-            manager.SetComponentData(array[i], new MoveComponent() { movementSpeed = 2 * Random.value});
-            manager.SetComponentData(array[i],
+            manager.SetComponentData(t, new MoveComponent() { movementSpeed = 2 * Random.value});
+            manager.SetComponentData(t, new ActorComponent() { atk = 2, def = 2, health = 5});
+            manager.SetComponentData(t,
                 new Translation() {Value = new float3(Random.Range(-4, 4), Random.Range(-4, 4), Random.Range(-4, 4))});
-            manager.SetSharedComponentData(array[i], new RenderMesh()
+            manager.SetSharedComponentData(t, new RenderMesh()
             {
                 mesh = _mesh,
                 material = _material
             });
         }
 
-    }
-
-    private void Update()
-    {
-        
     }
 
     private void OnDestroy()

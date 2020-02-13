@@ -12,13 +12,23 @@ public class EnemySystem : JobComponentSystem
         Entities.WithoutBurst().ForEach((in PlayerComponentTag p, in Translation t) => { playerPos = t.Value; }).Run();
 
         float delta = Time.DeltaTime;
-        
+
         var job = Entities.ForEach(
-            (ref ActorComponent a, ref Translation t, in EnemyComponentTag e) =>
+            (ref ActorComponent a, ref Translation t, in EnemyComponent e) =>
             {
-                t.Value = t.Value + math.normalize(playerPos - t.Value) * delta;
+                float3 directionToPlayer = playerPos - t.Value;
+               // if (math.length(directionToPlayer) < 1.25f)
+
+               t.Value = t.Value + math.normalize(directionToPlayer) * delta;
             }
             ).Schedule(inputDeps);
+        
+        /*Entities.WithoutBurst().ForEach((ref ActorComponent a, in PlayerComponentTag p) =>
+        {
+            a.health -= damage;
+            if(a.health <= 0)
+                Debug.Log("player dead");
+        }).Run();*/
         
         return job;
     }
