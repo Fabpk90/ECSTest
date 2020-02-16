@@ -1,10 +1,12 @@
 ﻿using Unity.Entities;
 using Unity.Mathematics;
+using Unity.Physics;
 using Unity.Rendering;
 using Unity.Transforms;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Material = UnityEngine.Material;
+using Collider = Unity.Physics.Collider;
 
 public class PlayerInputECS : MonoBehaviour
 {
@@ -40,10 +42,13 @@ public class PlayerInputECS : MonoBehaviour
         manager = World.DefaultGameObjectInjectionWorld.EntityManager;
         
         var playerArchetype = manager.CreateArchetype( typeof(Translation), typeof(RenderMesh),
-            typeof(LocalToWorld), typeof(MoveComponent), typeof(ActorComponent), typeof(PlayerComponentTag));
+            typeof(LocalToWorld), typeof(MoveComponent), typeof(ActorComponent), typeof(PlayerComponentTag), typeof(PhysicsCollider));
         
        _entity = manager.CreateEntity(playerArchetype);
        
+       manager.SetComponentData(_entity,
+           new PhysicsCollider()
+               {Value = BlobAssetReference<Collider>.Create(new Collider() {Filter = CollisionFilter.Default})});
        manager.SetComponentData(_entity, new Translation() { Value = new float3( 10, 0, 0)});
        manager.SetComponentData(_entity, new ActorComponent() { atk = 2, def = 3, health = 50});
        

@@ -19,7 +19,7 @@ public class EnemySystem : JobComponentSystem
                 float3 directionToPlayer = playerPos - t.Value;
                // if (math.length(directionToPlayer) < 1.25f)
 
-               t.Value = t.Value + math.normalize(directionToPlayer) * delta;
+              //t.Value = t.Value + math.normalize(directionToPlayer) * delta;
             }
             ).Schedule(inputDeps);
         

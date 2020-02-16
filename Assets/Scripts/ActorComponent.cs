@@ -9,6 +9,4 @@ public struct ActorComponent : IComponentData
     public float def;
 
     public float atkSum;
-    
-    public 
 }
